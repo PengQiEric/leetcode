@@ -32,7 +32,7 @@ public class AddTwoNumbers3 {
 		ListNode lb = new ListNode(6);
 		ListNode lc = new ListNode(4);
 		l1.next = l2; l2.next = l3;
-		la.next = lb; lb.next = lc;
+		la.next = lb; //lb.next = lc;
 		ListNode r = addTwoNumbers(l1, la);
 		do{
 			System.out.print(r.val+"->");
@@ -54,6 +54,25 @@ public class AddTwoNumbers3 {
     		
     		nextL1 = nextL1.next; nextL2 = nextL2.next; nextResult = nextResult.next;
     	}
+    	
+    	// l1 l2 may not be the same size
+    	if(nextL1!=null){
+    		do{
+    			nextResult.next = new ListNode((nextL1.val+carryBit)%10);
+    			carryBit = (nextL1.val+carryBit)/10;
+    			
+    			nextResult = nextResult.next; nextL1 = nextL1.next; 
+    		}while(nextL1!=null);
+    	}
+    	else if(nextL2!=null){
+    		do{
+    			nextResult.next = new ListNode((nextL2.val+carryBit)%10);
+    			carryBit = (nextL2.val+carryBit)/10;
+    			
+    			nextResult = nextResult.next; nextL2 = nextL2.next; 
+    		}while(nextL2!=null);
+    	}
+    	
     	if(carryBit == 1){
     		nextResult.next = new ListNode(carryBit);
     	}
