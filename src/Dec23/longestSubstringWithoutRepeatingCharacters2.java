@@ -33,7 +33,7 @@ public class longestSubstringWithoutRepeatingCharacters2 {
 			char last = s.charAt(i);
     		for(int j=i-1; j>=i-1-optEnd[i-1]+1; j--){
     			if(last == s.charAt(j)){
-    				optEnd[i] = 1;
+    				optEnd[i] = i-j;
     				found = true;
     				break;
     			}
@@ -41,10 +41,6 @@ public class longestSubstringWithoutRepeatingCharacters2 {
     		if(!found){
     			optEnd[i] = optEnd[i-1]+1;
     		}
-    		if(last == s.charAt(i-1-optEnd[i-1]+1)){
-    			optEnd[i] = optEnd[i-1];
-    		}
-    		
     		opt[i] = Math.max(opt[i-1], optEnd[i]);
     	}
     	return opt[s.length()-1];
