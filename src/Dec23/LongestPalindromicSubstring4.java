@@ -32,7 +32,7 @@ public class LongestPalindromicSubstring4 {
     	
     	for(int i=1; i<s.length(); i++){
 			
-    		if((optEnd[i-1].start - 1) >0 && s.charAt(optEnd[i-1].start-1) == s.charAt(i)){
+    		if((optEnd[i-1].start - 1) >=0 && s.charAt(optEnd[i-1].start-1) == s.charAt(i)){
 				optEnd[i] = new Palindrome(optEnd[i-1].start-1, i);
 			}
     		else{
@@ -53,7 +53,7 @@ public class LongestPalindromicSubstring4 {
     			}
     		}
     		
-    		if(optEnd[i].length > opt[i-1].length){
+    		if(optEnd[i].length >= opt[i-1].length){
     			opt[i] = new Palindrome(optEnd[i].start, optEnd[i].end);
     		}
     		else{
