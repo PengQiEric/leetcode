@@ -1,6 +1,5 @@
 package dec24;
 
-import com.sun.media.jai.opimage.RescaleCRIF;
 
 /**
  * @author Paul Qi
