@@ -20,31 +20,22 @@ import java.util.Queue;
 
 public class ReverseInteger6 {
     public static int reverse(int x) {
-        Queue<Integer> digits = new LinkedList<Integer>();
-        int result=0;
-        boolean isPos = x>0?true:false;
-        while(x%10 == 0)x = x/10;
-        
+        int result=0;        
         while(x!=0){ // cannot use x>0 because x may be negative
-        	digits.offer(x%10);
+            // overflow
+        	if(result > 214748364 || (result == 214748364 && x%10>=7) || result < -214748364 || (result == -214748364 && x%10<-6)){
+        		return 0;
+        	}
+        	result = result*10 + x%10;
         	x = x/10;
         }
-        
-        while(!digits.isEmpty()){
-        	result = result*10 + digits.poll();
-        }
-        
-        // overflow
-        if((isPos && result<0) || (!isPos && result>0)){
-        	return 0;
-        }
-        
         return result;
     }
 	
 	public static void main(String[] args){
 		System.out.println(reverse(-123));
-		System.out.println(reverse(-10002));
-		System.out.println(reverse(1000000003));
+		System.out.println(reverse(1000));
+		System.out.println(reverse(1563847412));
+		System.out.println(reverse(-2147483648));
 	}
 }
