@@ -15,9 +15,45 @@ package dec25;
  */
 
 public class ContainerWithMostWater10 {
+	//we can use greedy to do that, I refer to others solution, it's so great!
     public static int maxArea(int[] height) {
+    	int i = 0, j=height.length-1;
+    	int mx = 0;
+    	while(i<j){
+    		mx = Math.max(mx, (j-i)*Math.min(height[i], height[j]));
+    		
+    		
+    		if(height[i]<height[j]){
+    			i++;
+    		}
+    		else{
+    			j--;
+    		}
+    	}
     	
-    	return 0;
+    	return mx;
+    }
+    
+    public static int maxArea1(int[] height){
+    	int i = 0, j=height.length-1;
+    	int mx = 0;
+    	while(i<j){
+    		mx = Math.max(mx, (j-i)*Math.min(height[i], height[j]));
+    		
+    		if(height[i]<height[j]){
+    			do{
+    				i++;
+    			}while(i<j&& height[i-1]>=height[i]);
+    		}
+    		else{
+    			do{
+    				j--;
+    			}while(i<j && height[j+1]>=height[j]);
+    		}
+    		
+    	}
+    	
+    	return mx;
     }
 	
 	public static void main(String[] args){
