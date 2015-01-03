@@ -24,50 +24,63 @@ public class MergekSortedLists23 {
 	ListNode last = new ListNode(0);
 
     public ListNode mergeKLists(List<ListNode> lists) {
-    	
-    	// create the heap;
-    	ListNode[] heap = new ListNode[lists.size()];
-    	heap[0] = lists.get(0);
-    	for(int i=1; i<lists.size(); i++){
-    		heapInsert(heap, i, lists.get(i));
+    	// input []
+    	if(lists.size() == 0){
+    		return null;
     	}
-    	int result = 0;
-    	ListNode head = last;
-    	do{
-    		result = heapDelete(heap,null, result);
-    	}while(result!=(lists.size()));
+    	// create the heap;
+    	int size = 0;
+    	for(int i=0; i<lists.size(); i++){
+    		if(lists.get(i)!=null){
+    			size++;
+    		}
+    	}
+    	ListNode[] heap = new ListNode[size];
     	
+
+    	for(int i=0, j=0; i<lists.size(); i++){
+    		if(lists.get(i) != null){
+        		heapInsert(heap, j, lists.get(i));
+        		j++;
+    		}
+    	}
+    	int heapSize = heap.length-1;
+    	ListNode head = last;
+    	while(heapSize>=0){
+    		heapSize = heapDelete(heap, heapSize);
+    	}
     	return head.next;
     }
     
-    public int heapDelete(ListNode[] heap,ListNode last1, int start){
-    	last.next = heap[start];
+    public int heapDelete(ListNode[] heap, int end){
+    	last.next = heap[0];
     	
-    	if(heap[start].next!=null){
-    		ListNode element = heap[start].next;
-    		heapAdjust(heap, start, element);
+    	if(heap[0].next!=null){
+    		ListNode element = heap[0].next;
+    		heapAdjust(heap, end, element);
     		last = last.next;
-    		return start;
+    		return end;
     	}
     	else{
-    		if(start == heap.length-1){
-    			return heap.length;
+    		if(end == 0){
+    			return -1;
     		}
-    		heapAdjust(heap,start+1, heap[start+1]);
+    		heap[0] = heap[end];
+    		heapAdjust(heap,end-1, heap[0]);
     		last = last.next;
-    		return start+1;
+    		return end-1;
     	}
     }
     
-    public static void heapAdjust(ListNode[] heap, int start, ListNode element){
-    	int end = heap.length-1;
-    	for(int i=(start+1)*2-1; i<=end; i = (i+1)*2-1){
+    public static void heapAdjust(ListNode[] heap, int end, ListNode element){
+    	int begin = 0;
+    	for(int i=1; i<=end; i = (i+1)*2-1){
     		if(i<end && heap[i].val>heap[i+1].val)i++;
     		if(element.val <= heap[i].val) break;
-    		heap[start] = heap[i];
-    		start = i;
+    		heap[begin] = heap[i];
+    		begin = i;
     	}    	
-    	heap[start] = element;
+    	heap[begin] = element;
     }
     
     public void heapInsert(ListNode[] heap, int i, ListNode element){
@@ -97,17 +110,20 @@ public class MergekSortedLists23 {
     	ListNode n10 = new ListNode(10);
     	ListNode n11 = new ListNode(11);
     	ListNode n12 = new ListNode(12);
-    	n1.next = n4; n4.next = n7; n7.next=n10;
-    	n2.next = n5; n5.next = n8; n8.next = n11;
+    	//n1.next = n4; //n4.next = n7; n7.next=n10;
+//    	n2.next = n5; n5.next = n8; n8.next = n11;
     	n3.next = n6; n6.next = n9; n9.next = n12;
     	List<ListNode> lists = new LinkedList<ListNode>();
 //    	lists.add(n11);
 //    	lists.add(n9);
 //    	lists.add(n7);
-    	lists.add(n3);
-    	lists.add(n2);
+//    	lists.add(n3);
+    	n1 = null;
+//    	n2 = null;
     	lists.add(n1);
+    	lists.add(n2);
 //    	lists.add(n5);
+    	System.out.println(lists.toString());
     	MergekSortedLists23 test = new MergekSortedLists23();
     	ListNode result = test.mergeKLists(lists);
     	while(result!=null){
