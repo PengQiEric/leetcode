@@ -84,7 +84,6 @@ public class MergekSortedLists23 {
     }
     
     public void heapInsert(ListNode[] heap, int i, ListNode element){
-    	int k=0;
     	for(int j=(i+1)/2-1; j>=0 && i!=0; j = (j+1)/2-1){
     		if(heap[j].val <= element.val){
     			heap[i] = element; break;
