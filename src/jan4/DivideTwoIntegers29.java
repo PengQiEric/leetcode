@@ -40,6 +40,7 @@ public class DivideTwoIntegers29 {
     	return 0;
     }    
     
+    // Totally refer to others
     public static int divide(int dividend, int divisor) {
         int positive = 1;
         long dividendL = dividend, divisorL = divisor;

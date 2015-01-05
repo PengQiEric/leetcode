@@ -11,7 +11,7 @@ import java.util.List;
 
 public class GenerateParentheses22 {
     public static List<String> generateParenthesis(int n) {
-        
+        // () (()) ()()
     	return null;
     }
     
