@@ -27,10 +27,7 @@ public class LongestValidParentheses32 {
     	opt[0] = 0; optEnd[0] = 0;
     	
     	for(int i=1; i<opt.length; i++){
-    		if(s.charAt(i) == '('){
-    			optEnd[i] = 0;
-    		}
-    		else if(s.charAt(i) == ')' && i-optEnd[i-1]-1>=0 && s.charAt(i-optEnd[i-1]-1) == '('){
+    		if(s.charAt(i) == ')' && i-optEnd[i-1]-1>=0 && s.charAt(i-optEnd[i-1]-1) == '('){
     			int val = i-optEnd[i-1]-2;
     			if(val>0){
         			optEnd[i] = optEnd[i-1]+2+optEnd[val];
@@ -40,6 +37,8 @@ public class LongestValidParentheses32 {
     			}
     		}
     		else{
+//    			s.charAt(i) == '('
+    			optEnd[i] = 0;
     			/*Stack<Character> stack = new Stack<Character>();
     			stack.push(s.charAt(i));
     			int valid = 0,k;
