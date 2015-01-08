@@ -25,26 +25,21 @@ public class N_Queens51 {
     		for(int j=0; j<count; j++){
     			String[] solution = result.remove(0);
     			int cols = i+1;
+    			StringBuffer newStrBuffer = new StringBuffer();
+    			for(int k=0; k<cols-1; k++) newStrBuffer.append(".");
+    			newStrBuffer.append("Q");
+    			String newStr = newStrBuffer.toString();
+    			
     			for(int k=0; k<cols; k++){
     				String[] newSol = new String[cols];
-    				// change old Strings
-    				for(int p=0; p<solution.length; p++){
-    					if(k<cols-1){
-    						newSol[p] = solution[p].substring(0, k)+'.'+solution[p].substring(k);
-    					}
-    					else{
-    						newSol[p] = solution[p].substring(0, k)+'.';
-    					}
+    				int oldSol = 0;
+    				for(int p=0; p<k; p++,oldSol++){
+    					newSol[p] = solution[oldSol]+".";
     				}
-    				String newS = "";
-    				for(int p=0; p<k; p++){
-    					newS += ".";
+    				newSol[k] = newStr;
+    				for(int p=k+1; p<cols; p++,oldSol++){
+    					newSol[p] = solution[oldSol]+".";
     				}
-    				newS += "Q";
-    				for(int p=k+1; p<newSol.length; p++){
-    					newS += ".";
-    				}
-    				newSol[newSol.length-1] = newS;
     				result.add(newSol);
     			}
     			
@@ -61,7 +56,7 @@ public class N_Queens51 {
     public static void main(String[] args){
     	N_Queens51 test = new N_Queens51();
 //    	System.out.println("ab".substring(0,0));
-    	List<String[]> result = test.solveNQueens(8);
+    	List<String[]> result = test.solveNQueens(4);
     	for(String[] ss: result){
     		for(String s: ss){
     			System.out.println(s);
