@@ -5,26 +5,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 
  * @author Paul Qi
- * Given a set of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
- * 
- * The same repeated number may be chosen from C unlimited number of times.
- * Note:
- * All numbers (including target) will be positive integers.
- * Elements in a combination (a1, a2, É , ak) must be in non-descending order. (ie, a1 ² a2 ² É ² ak).
+ *
+ * same as the CombinationSum except
  * The solution set must not contain duplicate combinations.
- * For example, given candidate set 2,3,6,7 and target 7, 
- * A solution set is: 
- * [7] 
- * [2, 2, 3]
  */
 
-public class CombinationSum39 {
-	
+public class CombinationSumII40 {
 	private List<List<Integer>> solution = new LinkedList<List<Integer>>();
 	
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
     	List<Integer> result = new LinkedList<Integer>();
     	Arrays.sort(candidates);
     	combinationSumHelper(result, candidates, 0, target);
@@ -34,6 +24,12 @@ public class CombinationSum39 {
     private void combinationSumHelper(List<Integer> result, int[] candidates, int start, int target){
     	
     	for(int i= start; i<candidates.length && candidates[i]<=target; i++){
+    		// how to remove duplicate.
+    		int k=0,last=result.size()-1;
+    		for(int j=i; j>=0 &&candidates[j] == candidates[i]; j--,k++);
+    		while(!result.isEmpty() && last>=0 && result.get(last--) == candidates[i])k--;
+    		if(k!=1)continue;
+    		
     		if(candidates[i] == target){
     			result.add(target);
     			clone(result);
@@ -42,7 +38,7 @@ public class CombinationSum39 {
     		}
     		else{
     			result.add(candidates[i]);
-    			combinationSumHelper(result, candidates, i, target-candidates[i]);
+    			combinationSumHelper(result, candidates, i+1, target-candidates[i]);
     			// backtracking
     			result.remove(result.size()-1);
     		}
@@ -58,10 +54,11 @@ public class CombinationSum39 {
     }
     
     public static void main(String[] args){
-    	CombinationSum39 test = new CombinationSum39();
+    	CombinationSumII40 test = new CombinationSumII40();
 //    	List<List<Integer>> result = test.combinationSum(new int[]{2,4}, 6);
 //    	List<List<Integer>> result = test.combinationSum(new int[]{2,3,6,7}, 7);
-    	List<List<Integer>> result = test.combinationSum(new int[]{8,7,4,3}, 11);
+//    	List<List<Integer>> result = test.combinationSum2(new int[]{10,1,2,7,6,1,5}, 8);
+    	List<List<Integer>> result = test.combinationSum2(new int[]{3,1,3,5,1,1}, 8);
     	for(List<Integer> l: result){
     		for(Integer i: l){
     			System.out.print(i+" ");
@@ -69,4 +66,5 @@ public class CombinationSum39 {
     		System.out.println();
     	}
     }
+    
 }
