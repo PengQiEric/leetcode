@@ -13,7 +13,7 @@ import java.util.List;
 
 public class N_Queens51 {
     
-	// I can solve it using DP Status: Time Limit Exceeded
+	// I can solve it using DP Status: Time Limit Exceeded // it is kind of BFS
 	public List<String[]> solveNQueens(int n) {
     	List<String[]> result = new LinkedList<String[]>();
 		// base case;
@@ -47,11 +47,6 @@ public class N_Queens51 {
     	}
     	return result;
     }
-//	public List<String[]> solveNQueens(int n) {
-//		
-//		return null;
-//	}
-//	private void trail(int i, int n)
 	
     public static void main(String[] args){
     	N_Queens51 test = new N_Queens51();
