@@ -14,6 +14,8 @@ import java.util.List;
  */
 
 public class Permutations46 {
+	// when can we use backtracking? some stragety problem?
+	
     List<List<Integer>> result = new LinkedList<List<Integer>>();
 
     public List<List<Integer>> permute(int[] num) {
@@ -36,10 +38,11 @@ public class Permutations46 {
     // cost too many time to change the data structure
     private void copyAdd(List<Integer> old, int num){
     	for(int i=0; i<=old.size(); i++){
-    		List<Integer> temp = new LinkedList<Integer>();
+    		List<Integer> temp = new LinkedList<Integer>(old);
+    		/*
     		for(Integer j: old){
     			temp.add(j);
-    		}
+    		}*/
     		temp.add(i, num);
     		result.add(temp);
     	}
