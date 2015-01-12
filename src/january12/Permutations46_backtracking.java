@@ -15,10 +15,9 @@ public class Permutations46_backtracking {
     
     private void permuteHelper(List<List<Integer>> result, int[] num, int start){
     	// change from num.length to num.length-1, it will slow
-    	if(start>=num.length-1){
+    	if(start>=num.length){
     		List<Integer> temp = copyResult(num);
     		result.add(temp);
-    		return;
     	}
     	for(int j=start; j<num.length; j++){
     		swap(num, start, j);
