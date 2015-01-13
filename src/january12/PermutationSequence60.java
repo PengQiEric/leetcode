@@ -63,6 +63,6 @@ public class PermutationSequence60 {
     
     public static void main(String[] args){
     	PermutationSequence60 test = new PermutationSequence60();
-    	System.out.println(test.getPermutation(3, 6));
+    	System.out.println(test.getPermutation(4, 10));
     }
 }
