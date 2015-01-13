@@ -13,6 +13,7 @@ package jan5;
  */
 
 public class NextPermutation31 {
+	//wrong!!!!
     public static void nextPermutation_cannot_find_the_rule(int[] num) {
     	int i;
     	int increament = -1;
