@@ -1,5 +1,6 @@
 package january15;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -50,4 +51,29 @@ public class BinaryTreeInorderTraversal94 {
     	}
     	return result;
     }
+    
+    
+    // great solution, it's kind of understanding the essence
+    public List<Integer> inorderTraversal_nostate(TreeNode root) {
+    	List<Integer> results = new ArrayList<Integer>();
+    	TreeNode cur = root;
+    	Stack<TreeNode> stack = new Stack<TreeNode>();
+    	while(cur!=null){
+    		stack.push(cur);
+    		cur = cur.left;
+    	}
+    	
+    	while(!stack.isEmpty()){
+    		cur = stack.pop();
+    		results.add(cur.val);
+    		cur = cur.right;
+    		while(cur!=null){
+    			stack.push(cur);
+    			cur = cur.left;
+    		}
+    	}
+    	
+    	return results;
+    }
+    
 }
