@@ -1,5 +1,7 @@
 package january18;
 
+import java.util.HashMap;
+
 import aTool.TreeNode;
 
 /**
@@ -12,18 +14,15 @@ import aTool.TreeNode;
 
 public class ConstructBinaryTreefromPreorderandInorderTraversal105 {
 	
+	// http://leetcode.com/2011/04/construct-binary-tree-from-inorder-and-preorder-postorder-traversal.html
+	
+	HashMap<Integer,Integer> mapIndex = new HashMap<Integer,Integer>();
 	// it is divide and conquer. The element of preorder can split in-order element into two part
 	public TreeNode buildTree(int[] preorder, int[] inorder) {
-		TreeNode root = null, current=null; 
-		if(preorder.length>0){
-			root = new TreeNode(preorder[0]);
-			current = root;
+		for(int i=0; i<inorder.length; i++){
+			mapIndex.put(inorder[i], i); // used to accelerate the speed.
 		}
-		
-		/* 
-		
-		*/
-		return root;
+		return buildTree(0,0,inorder.length-1,preorder,inorder);
     }
 	
 	private TreeNode buildTree(int pindex, int istart, int iend, int[] preorder, int[] inorder){
@@ -35,14 +34,12 @@ public class ConstructBinaryTreefromPreorderandInorderTraversal105 {
 			return new TreeNode(inorder[istart]);
 		}
 		
-		int i;
-		for(i=istart; i<=iend; i++){
-			if(inorder[i] == preorder[pindex]){
-				break;
-			}
-		}
-		TreeNode root = new TreeNode(inorder[i]);
-		
+		TreeNode root = new TreeNode(preorder[pindex]);
+		int rootPos = mapIndex.get(preorder[pindex]);
+		int offset = rootPos - istart+1;
+		root.left = buildTree(pindex+1, istart, rootPos-1,preorder, inorder);
+		root.right = buildTree(pindex+offset, rootPos+1,iend, preorder, inorder);
+
 		return root;
 	}
 }
