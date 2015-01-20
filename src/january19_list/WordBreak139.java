@@ -33,7 +33,13 @@ public class WordBreak139 {
     public static void main(String[] args){
     	WordBreak139 test = new WordBreak139();
     	Set<String> dict = new HashSet<String>();
-    	dict.add("leet"); dict.add("code");
+//    	dict.add("leet"); dict.add("code");
+    	dict.add("a"); dict.add("aa");
+    	dict.add("aaa"); dict.add("aaaa");
+    	dict.add("aaaaa"); dict.add("aaaaaa");
+    	dict.add("aaaaaaa"); dict.add("aaaaaaaa");
+    	dict.add("aaaaaaaaa"); dict.add("aaaaaaaaaa");
     	System.out.println(test.wordBreak("leetcode", dict));
+    	System.out.println(test.wordBreak("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab", dict));
     }
 }
