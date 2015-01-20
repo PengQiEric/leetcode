@@ -17,6 +17,9 @@ import java.util.Queue;
  *                   it should invalidate the least recently used item before inserting a new item.
  */
 
+// better to use a double linked list, and the map will be key DoubleLinkedNode
+// operation: setHead, remove( for remove O(1) because of double linked)
+
 public class LRUCache {
 	private int capacity;
 	private HashMap<Integer, Integer> cache;
