@@ -15,8 +15,10 @@ public class SortList148 {
     	if(head == null || head.next == null){
     		return head;
     	}
-    	ListNode slow = head, fast = head.next;  // important, it is the really half cut
-    	while(fast!=null && fast.next!=null){ //
+    	ListNode slow = head, fast = head;  // important, it is the really half cut
+    											// really important!!! 
+    										   // maybe next time try fast.next!=null && fast.next.next!=null
+    	while(fast.next!=null && fast.next.next!=null){ //
     		fast = fast.next.next;
     		slow = slow.next;
     	}
@@ -73,7 +75,7 @@ public class SortList148 {
 		ListNode n1 = new ListNode(1);
 		ListNode n2 = new ListNode(4);
 		ListNode n3 = new ListNode(3);
-		n0.next = n1; n1.next = n2; //n2.next = n3;
+		n0.next = n1; n1.next = n2; n2.next = n3;
 		ListNode head = test.sortList(n0);
 		while(head!=null){
 			System.out.print(head.val+" ");
