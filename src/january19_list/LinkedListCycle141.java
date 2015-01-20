@@ -31,7 +31,7 @@ public class LinkedListCycle141 {
 	public static void main(String[] args){
 		ListNode n0 = new ListNode(0);
 		ListNode n1 = new ListNode(1);
-		n0.next = n1;
+		n0.next = n0;
 		n1.next = n0;
 		
 		LinkedListCycle141 test = new LinkedListCycle141();
