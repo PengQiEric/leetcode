@@ -7,6 +7,8 @@ import aTool.ListNode;
  *
  * Sort a linked list in O(n log n) time using constant space complexity.
  */
+// I guess merge sort is kind of easy to used on linked list
+// quicksort is easy to implement in the array
 
 // good time to review some sort algorithm.
 public class SortList148 {
