@@ -21,9 +21,6 @@ package january23;
 public class DecodeWays91 {
     // bottom up
     public int numDecodings(String s) {
-//    	if(s.indexOf("0")>=0){
-//    		return 0;	// test case: "01" 0
-//    	}
     	if(s.length() == 0){
     		return 0;
     	}
@@ -31,38 +28,19 @@ public class DecodeWays91 {
     	results[0] = s.charAt(0) == '0'?0:1;
     	
     	for(int i=1; i<s.length(); i++){
-    		if(s.charAt(i) == '0'){
-    			if(s.charAt(i-1) == '1' || s.charAt(i-1) == '2'){
-    				if(i-2>=0){
-    					results[i] = results[i-2];
-    				}
-    				else{
-        				results[i] = 1;
-    				}
-    			}
-    			else{
-    				return 0;
-    			}
+    		if(s.charAt(i)!='0'){
+    			results[i] += results[i-1];
     		}
-    		else if(Integer.parseInt(s.substring(i-1,i+1))<=26 && Integer.parseInt(s.substring(i-1,i+1))>=11){
-    			if(i-2>=0){
-    				results[i] = results[i-1]+results[i-2];
-    			}
-    			else{
-    				results[i] = results[i-1]+1;
-    			}
-    		}
-    		else{
-    			results[i] = results[i-1];
+    		if(Integer.parseInt(s.substring(i-1,i+1))<=26 && Integer.parseInt(s.substring(i-1,i+1))>=10){
+    			results[i] += i-2>=0?results[i-2]:1;
     		}
     	}
-    	
     	return results[s.length()-1];
     }
     
     public static void main(String[] args){
     	DecodeWays91 test = new DecodeWays91();
-    	System.out.println(test.numDecodings("012"));
+    	System.out.println(test.numDecodings("12"));
     	System.out.println(test.numDecodings("230"));
     }
 }
