@@ -19,6 +19,8 @@ import aTool.ListNode;
 public class ReverseLinkedListII92 {
 	// add one extra node may help to shorten the code. For even m is 1, then we can get the right begin node
 	// ListNode p1 = ListNode(0) p1.next = head;
+	
+	// but it seems it only works for C++, because JAVA is always copy by value
     public ListNode reverseBetween(ListNode head, int m, int n) {
     	if(m==1){
     		ListNode current = head;

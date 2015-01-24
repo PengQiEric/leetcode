@@ -27,12 +27,13 @@ public class Subsets78 {
         return results;
     }
     
+    // maybe it is not a good solution
     public void subsetsHelper(int[] num, int[] s, int start, List<List<Integer>> results){
     	if(start == s.length){
     		copyList(num,results,s);
     	}
     	for(int i=start+1; i<=s.length; i++){
-    		num[start] = 1;
+    		num[start] = 1; // because start always be 0
     		subsetsHelper(num, s, i, results);
     		num[start] = 0;
     	}
