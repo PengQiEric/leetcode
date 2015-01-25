@@ -31,6 +31,7 @@ public class SortList148 {
     	return merge(head, second);
     }
     
+    // this is not a concise version of merge, see the #code#in January 24
     private ListNode merge(ListNode left, ListNode right){
     	ListNode head, current = null;
     	if(left == null && right == null){
