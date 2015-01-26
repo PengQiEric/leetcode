@@ -10,6 +10,23 @@ package january25;
 	the contiguous subarray [2,3] has the largest product = 6.
  */
 
+/*
+ * sometimes use some space can save some logic branch
+ * Besides keeping track of the largest product, we also need to keep track of the smallest product. 
+ * Why? The smallest product, 
+ * which is the largest in the negative sense could become the maximum when being multiplied by a negative number.
+
+	Let us denote that:
+	
+	f(k) = Largest product subarray, from index 0 up to k.
+	Similarly,
+	
+	g(k) = Smallest product subarray, from index 0 up to k.
+	Then,
+	
+	f(k) = max( f(k-1) * A[k], A[k], g(k-1) * A[k] )
+	g(k) = min( g(k-1) * A[k], A[k], f(k-1) * A[k] )
+ */
 public class MaximumProductSubarray152 {
     public int maxProduct(int[] A) {	
     		// test case: [-2, 3, -4]  [7,-2,-4] [-1,-2,-9,-6]
