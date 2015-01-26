@@ -1,0 +1,31 @@
+
+In backtracking, you are not starting again. 
+Instead, you iterate through all options at the current situation.
+
+Think about finding solution for a maze. At one point where you have two different paths, 
+you try the left one first. If the left one does not lead you to the exit, 
+you return to the point and try the other path. That's how backtracking works. 
+In 8 Q and other problems where backtracking can be used, the confusing part is in the problem domain - 
+
+[how to iterate through your options in a given situation in a deterministic way.]
+
+EDIT: the following is a pseudo code helping understanding backtracking.
+
+# depending on the problem, backtracking is not necessarily calling the
+# method itself directly. for now, let's just stick with the simple case.
+
+def backtracking(state)
+  option_list = state.get_all_options
+  option_list.each {|option|
+    state.apply option
+    return resolved if state.is_resolved
+    return resolved if backtracking(state) == resolved
+    state.undo option
+  }
+  return not_resolved
+end
+For 8Q question:
+
+state.get_all_options would return a list of the possible positions for the next queen
+state.is_resolved would test if all queens are on the board and if they are good with each other.
+state.apply and state.undo will modify the board to apply or undo a positioning.
