@@ -79,5 +79,7 @@ public class MaximumProductSubarray152 {
     	System.out.println((new MaximumProductSubarray152()).maxProduct(new int[]{7,-2,-4}));
     	System.out.println((new MaximumProductSubarray152()).maxProduct(new int[]{-1,-2,-9,-6}));
 //    	System.out.println((new MaximumSubarray53()).maxSubArray_divideandconquer(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
+    	
+    	System.out.println("0k.;r0.k;".replaceAll("[^0-9a-zA-Z]*","").toLowerCase());
     }
 }
