@@ -20,7 +20,7 @@ public class LargestNumber175_QuickSort {
 		int i = low, j = high+1;
 		while(true){
 			while(compare(strs[++i],strs[low])<0){
-				if(i == high) break;
+				if(i == high) break;	// break is only break the inner-loop.
 			}
 			while(compare(strs[--j],strs[low])>0){
 				if(j == low) break;
@@ -57,6 +57,7 @@ public class LargestNumber175_QuickSort {
     
     public static void main(String[] args){
     	LargestNumber175_QuickSort test = new LargestNumber175_QuickSort();
+    	System.out.println(test.partition(new String[]{"30","40","50"},0,2));
     	System.out.println(test.largestNumber(new int[]{3,30,34,5,9}));
     	System.out.println(test.largestNumber(new int[]{1,1,1}));
     }
