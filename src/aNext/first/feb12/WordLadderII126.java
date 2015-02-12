@@ -34,19 +34,29 @@ import java.util.Set;
  */
 
 public class WordLadderII126 {
-    public List<List<String>> findLadders_invalid(String start, String end, Set<String> dict) {
-    	List<List<String>> results = new ArrayList<List<String>>();
+	/*
+	 * BFS is better for finding the minimum length of shortest path 
+	 * while DFS is better for finding the actual shortest path.
+	 */
+	
+	List<List<String>> results = new ArrayList<List<String>>();
+	Map<String,List<String>> store = new HashMap<String, List<String>>();
+    public List<List<String>> findLadders(String start, String end, Set<String> dict) {
     	Queue<String> queue = new LinkedList<String>();
-    	Map<String,String> store = new HashMap<String, String>();
     	queue.add(start);
+    	int level = 0; // why we need this, because we need to know when to stop the DFS.
+    				  // why we cannot use the start key not in the map to stop? because dict may contains it!
     	while(!queue.isEmpty()){
     		int size = queue.size();
     		boolean levelFound = false;
+    		Set<String> visited = new HashSet<String>();
     		for(int i=0; i<size; i++){
     			String s = queue.poll();
     			if(isOneDiff(s,end)){
     				levelFound = true;
-    				cacheValue(store, results,end, s);
+    				List<String> re = new ArrayList<String>();
+    				re.add(end);
+    				cacheValue(re, s, level);
     			}
     			else if(!levelFound){
     				for(Iterator<String> iter = dict.iterator(); iter.hasNext();){
@@ -55,25 +65,45 @@ public class WordLadderII126 {
 //    						iter.remove();	// this solution is wrong, because we cannot delete it immediately, maybe
     										// at the same level of the parent node, maybe it also be the next child.
     										// we want all the solution, so we cannot delete it immediately.
-    						store.put(value, s);
-    						queue.add(value);
+    						if(store.containsKey(value)){
+    							List<String> temp = store.get(value);
+    							temp.add(s);
+    							store.put(value,temp);
+    						}
+    						else{
+    							List<String> temp = new ArrayList<String>();
+    							temp.add(s);
+    							store.put(value, temp);
+    						}
+    						if(!visited.contains(value)){
+    							queue.add(value);
+    						}
+    						visited.add(value);
     					}
     				}
     			}
     		}
+    		dict.removeAll(visited);	// delete all this level nodes
+    		level++;
     	}
     	return results;
     }
     
-    private void cacheValue(Map<String,String> store, List<List<String>> results, String end, String s){
-    	List<String> result = new LinkedList<String>();
-    	result.add(s);
-    	while(store.containsKey(s)){
-    		s = store.get(s);
-    		result.add(0, s);
+    // DFS get results
+    private void cacheValue(List<String> re, String s, int depth){
+    	if(depth>0){
+    		List<String> list = store.get(s);
+    		re.add(0,s);
+    		for(String str: list){
+    			cacheValue(re,str,depth-1);
+    		}	
+    		re.remove(0);
     	}
-    	result.add(end);
-    	results.add(result);
+    	else{
+    		re.add(0, s);
+    		results.add(new ArrayList<String>(re));
+    		re.remove(0);
+    	}
     }
     
     private boolean isOneDiff(String s, String t){
@@ -92,12 +122,15 @@ public class WordLadderII126 {
     public static void main(String[] args){
     	WordLadderII126 test = new WordLadderII126();
     	Set<String> dict = new HashSet<String>();
-    	dict.add("hot");
-    	dict.add("dog");
-    	dict.add("cog");
-    	dict.add("pot");
-    	dict.add("dot");
-    	List<List<String>> result = test.findLadders("hot", "dog", dict);
+    	dict.add("ted");
+    	dict.add("tex");
+    	dict.add("red");
+    	dict.add("tax");
+    	dict.add("tad");
+    	dict.add("den");
+    	dict.add("rex");
+    	dict.add("pee");
+    	List<List<String>> result = test.findLadders("red", "tax", dict);
     	for(List<String> l: result){
     		for(String s:l){
     			System.out.print(s+" ");
