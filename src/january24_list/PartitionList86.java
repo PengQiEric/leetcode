@@ -42,7 +42,7 @@ public class PartitionList86 {
 	 *  sometimes we need to handle the new head. And try to think about all the possible situation.
 	 */
 	
-    public ListNode partition(ListNode head, int x) {
+    public ListNode partition_1(ListNode head, int x) {
     	if(head == null || head.next == null){
     		return head;
     	}
@@ -93,17 +93,55 @@ public class PartitionList86 {
     public static void main(String[] args){
     	PartitionList86 test = new PartitionList86();
     	
-    	ListNode n1 = new ListNode(1);
-    	ListNode n2 = new ListNode(4);
+    	ListNode n1 = new ListNode(2);
+    	ListNode n2 = new ListNode(1);
     	ListNode n3 = new ListNode(3);
     	ListNode n4 = new ListNode(2);
     	ListNode n5 = new ListNode(5);
     	ListNode n6 = new ListNode(2);
-	    n1.next = n2; n2.next = n3; n3.next = n4; n4.next = n5; n5.next = n6;
-		ListNode head = test.partition_twonewnode(n1, 3);
+	    n1.next = n2; //n2.next = n3; n3.next = n4; n4.next = n5; n5.next = n6;
+		ListNode head = test.partition(n1, 2);
 		while(head!=null){
 			System.out.print(head.val+" ");
 			head = head.next;
 		}
+    }
+    
+    private ListNode partition(ListNode head, int x){
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode slow = null;
+        if(head.val<x){
+            slow = head;
+        }
+        ListNode fast = head;   // [1,1] 2        
+        while(fast.next!=null){
+            if(fast.next.val>=x){
+                fast = fast.next;
+            }
+            else{
+                ListNode temp = fast.next.next;
+                if(slow == null){
+                    fast.next.next = head;
+                    head = fast.next;
+                    slow = head;
+                    fast.next = temp;
+                }
+                else{
+                    ListNode t = slow.next;
+                    if(t == fast.next){
+                        slow = slow.next;
+                        fast = fast.next;
+                    }else{
+                        slow.next = fast.next;
+                        fast.next.next = t;
+                        slow = slow.next;
+                        fast.next = temp;
+                    }
+                }
+            }
+        }
+        return head;
     }
 }

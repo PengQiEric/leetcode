@@ -43,6 +43,10 @@ public class PermutationSequence60_refer {
     
     public static void main(String[] args){
     	PermutationSequence60_refer test = new PermutationSequence60_refer();
-    	System.out.println(test.getPermutation(3, 0));
+//    	System.out.println(test.getPermutation(3, 0));
+    	
+    	
+    	long d = (long)-2147483648 / -1;
+    	System.out.println(d*-1 == -2147483648);
     }
 }

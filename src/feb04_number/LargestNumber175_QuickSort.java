@@ -1,4 +1,4 @@
-package january28;
+package feb04_number;
 
 
 public class LargestNumber175_QuickSort {
@@ -15,7 +15,25 @@ public class LargestNumber175_QuickSort {
 		strs[j] = temp;
 	}
 	
+	// implement partition by myself again.
 	private int partition(String[] strs, int low, int high){
+		int i= low, j = high;
+		while(i<j){
+			while(i<=high && compare(strs[low], strs[i])>=0){
+				i++;
+			}
+			while(j>= low && compare(strs[low], strs[j])<0){
+				j--;
+			}
+			if(i<j){
+				swap(strs,i,j);
+			}
+		}
+		swap(strs,low,j);
+		return j;
+	}
+	
+	private int partition_1(String[] strs, int low, int high){
 		
 		int i = low, j = high+1;
 		while(true){

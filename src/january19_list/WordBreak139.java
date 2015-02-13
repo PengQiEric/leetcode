@@ -17,7 +17,7 @@ import java.util.Set;
 public class WordBreak139 {
 	// it is kind of DP, but we only need to share the same list
     public boolean wordBreak(String s, Set<String> dict) {
-    	List<Integer> results = new ArrayList<Integer>();
+    	List<Integer> results = new ArrayList<Integer>();	// record the result, I mean the position can break as word
     	results.add(-1);
     	for(int i=0; i<s.length(); i++){
     		for(int j=results.size()-1; j>=0; j--){

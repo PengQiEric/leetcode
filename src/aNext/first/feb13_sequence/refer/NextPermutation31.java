@@ -1,4 +1,4 @@
-package jan5;
+package aNext.first.feb13_sequence.refer;
 
 /**
  * @author Paul Qi
@@ -70,23 +70,23 @@ public class NextPermutation31 {
     public static void nextPermutation(int[] num) {
     	
     	int i;
-    	for(i=num.length-1; i>0; i--){
+    	for(i=num.length-1; i>0; i--){	// from the end from the first place num[i-1]<num[i];
     		if(num[i-1]<num[i])break;
     	}
     	
-    	if(i==0){
+    	if(i==0){	// if now it is the largest permutation, then reverse.
     		for(int j=0,k=num.length-1; j<k; j++,k--){
     			swap(num,j,k);
     		}
     	}
     	else{
-    		for(int j=num.length-1; j>=i; j--){
+    		for(int j=num.length-1; j>=i; j--){	// find the first place that num[j] is larger than the candidate.
     			if(num[j]>num[i-1]){
     				swap(num,i-1,j);
     				break;
     			}
     		}
-    		for(int j=i,k=num.length-1; j<k; j++,k--){
+    		for(int j=i,k=num.length-1; j<k; j++,k--){	// swap from descending sequence to ascending sequence.
     			swap(num,j,k);
     		}
     	}

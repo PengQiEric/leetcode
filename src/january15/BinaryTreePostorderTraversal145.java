@@ -1,5 +1,6 @@
 package january15;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -12,6 +13,45 @@ import aTool.TreeNode;
  */
 
 public class BinaryTreePostorderTraversal145 {
+	
+	// deserialization of binary tree
+	public TreeNode buildTree(int[] preorder, int[] inorder) {
+		return null;
+	}
+	
+	
+	
+	// if we think about the order left-right-root, the preorder is root-left-right, if we change the preorder to
+	// root-right-left, then the mirror should be the post-order
+	// how can we get the mirror order? using a stack.
+	public List<Integer> postOrderTraversal(TreeNode root){
+		List<Integer> result = new ArrayList<Integer>();
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		Stack<Integer> backStack = new Stack<Integer>();
+		TreeNode cur = root;
+		while(cur!=null){
+			stack.push(cur);
+			backStack.push(cur.val);
+			cur = cur.right;
+		}
+		
+		while(!stack.isEmpty()){
+			cur = stack.pop();
+			cur = cur.left;
+			while(cur!=null){
+				stack.push(cur);
+				backStack.push(cur.val);
+				cur = cur.right;
+			}
+		}
+		while(!backStack.isEmpty()){
+			result.add(backStack.pop());
+		}
+		return result;
+	}
+	
+	
+	
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new LinkedList<Integer>();
         Stack<TreeNode> stack = new Stack<TreeNode>();
