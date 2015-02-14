@@ -23,6 +23,7 @@ import java.util.List;
 	[1, 1, 6] 
  */
 
+// for backtracking problem, think about the GOAL and ACTION.
 public class CombinationSumII {
     List<List<Integer>> results = new ArrayList<List<Integer>>();
     public List<List<Integer>> combinationSum2(int[] num, int target) {
@@ -31,11 +32,15 @@ public class CombinationSumII {
         return results;
     }
     
+    // this kind of BFS of backtracking, I mean in this position, check all the possible value, then go to the next position
     private void combinationHelper(int[] num, int start, int target, List<Integer> result){
         for(int i=start; i<num.length; i++){    // why for loop, I have already make decision this step, why need for loop?
             if(target<num[i]) break;            // I think I can have other way to check the result. 
                                                 // but this way may because we now want the next num in this exact position.
                                                 // all the element after the previous element can in this order.
+            if(i>start && num[i-1] == num[i])continue;
+            // below is much better than the follow part
+/*
             int j = i-1, count = 0;
             while(j>=0 && num[j] == num[i]){
                 count++; j--;
@@ -46,7 +51,7 @@ public class CombinationSumII {
             	count--;	// we can only delete it when it matches the condition, so we cannot use count--;
             }
             if(count>0)continue;
-            
+*/            
             if(num[i] == target){
                 result.add(num[i]);
                 results.add(new ArrayList<Integer>(result));
@@ -61,9 +66,48 @@ public class CombinationSumII {
         }
     }
     
+    // this is kind of DFS backtracking, it means we check whether this element is in the result
+    // check both the possible situation(i.e. this element in, this element not in)
+    private void combinationHelper_DFS(int[] num, int start, int target, List<Integer> result){
+        if(start == num.length){
+            return;
+        }
+        else if(num[start] == target){
+            result.add(num[start]);
+            results.add(new ArrayList<Integer>(result));
+            result.remove(result.size()-1);
+            return;
+        }
+        else if(num[start] > target){
+            return;
+        }
+        else{
+            combinationHelper(num, start+1,target, result);
+            
+            int j = start-1, count = 0;
+            while(j>=0 && num[j] == num[start]){
+                count++; j--;
+            }
+            j = result.size()-1;
+            while(count>0 && j>=0 && result.get(j) == num[start]){
+            	j--;
+            	count--;	// we can only delete it when it matches the condition, so we cannot use count--;
+            }
+            if(count == 0){
+                result.add(num[start]);
+                combinationHelper(num,start+1,target-num[start], result);
+                result.remove(result.size()-1);
+            }
+        }
+    }
+    
+    
     public static void main(String[] args){
     	CombinationSumII test = new CombinationSumII();
     	List<List<Integer>> re = test.combinationSum2(new int[]{2,2,2}, 4);
+    	
+    	String[] s1 = "abvsds".split("\\.");
+    	
     	System.out.println();
     }
 }
