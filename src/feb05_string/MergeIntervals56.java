@@ -26,12 +26,13 @@ class Interval {
 }
 
 public class MergeIntervals56 {
+	// O(nlgn) time complexity, O(n) space complexity 
     public List<Interval> merge(List<Interval> intervals) {
     	Collections.sort(intervals, new MyComparator());	// order the interval by start time
     	List<Interval> results = new ArrayList<Interval>();
     	while(!intervals.isEmpty()){
     		Interval temp = intervals.remove(0);
-    		while(!intervals.isEmpty() && intervals.get(0).start<=temp.end){
+    		while(!intervals.isEmpty() && intervals.get(0).start<=temp.end){	// precondition the intervals start<= all the intervals after it.
     			Interval t =intervals.remove(0);
     			if(t.end>temp.end){
     				temp.end = t.end;
@@ -57,7 +58,7 @@ public class MergeIntervals56 {
     
     // in-place O(n) solution if the List is LinkedList
     public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
-//    	Collections.sort(intervals, new MyComparator());
+    	Collections.sort(intervals, new MyComparator());
     	int i=0;
     	for(;i<intervals.size();){
     		Interval temp = intervals.get(i);
@@ -65,7 +66,7 @@ public class MergeIntervals56 {
     			break;
     		}
     		else if(newInterval.end>=temp.start && newInterval.end<=temp.end
-    				|| newInterval.start>=temp.start && newInterval.start<=temp.end){
+    				|| newInterval.start>=temp.start && newInterval.start<=temp.end){	// it means contains relationship
     			intervals.remove(temp);
     			if(temp.end>newInterval.end){
     				newInterval.end = temp.end;
@@ -74,8 +75,8 @@ public class MergeIntervals56 {
     				newInterval.start = temp.start;
     			}
     		}
-    		else if(newInterval.end>=temp.end && newInterval.start<=temp.start){
-    			intervals.remove(temp);
+    		else if(newInterval.end>=temp.end && newInterval.start<=temp.start){	// it means new interval contains it!
+    			intervals.remove(temp);												// if it contains new interval, we don't do anything.
     		}
     		else{
     			i++;
