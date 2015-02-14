@@ -8,6 +8,7 @@ import java.util.Set;
 /**
  * 
  * @author PAUL QI
+ * Why you study that? God gives you gift on that. You should make use of it to help others. Worship God forever!
  * 
  *  The gray code is a binary numeral system where two successive values differ in only one bit.
 
@@ -30,6 +31,8 @@ import java.util.Set;
 public class GrayCode89 {
 	// of course, bit manipulate is better. And it seems that bit manipulate is useful for some sequence problem.
 	// great refer http://n00tc0d3r.blogspot.com/2013/03/gray-code-and-variants.html
+	
+	// BTW, I think it's exponential time
 	public List<Integer> grayCode_bit(int n){
 		// the basic idea is <Bi> = 0concate<Bi-1> U 1concate<Bi-1>
 		List<Integer> result = new ArrayList<Integer>();
