@@ -18,6 +18,10 @@ import java.util.Map;
 
 public class DistinctSubsequences115 {
     public int numDistinct_DP(String S, String T) {
+    	// actually we can change it to two one level array then make the space complexity to O(n)
+    	// because we only use the results in the previous left and previous left down
+    	
+    	
     	int[][] results = new int[S.length()+1][T.length()+1];
     	
     	// base case
